@@ -2,6 +2,8 @@
 
 > css-any plugin for [gulp](https://github.com/wearefractal/gulp)
 
+![lay CSS cay kool](http://media.giphy.com/media/5pxnxdzdZfXFK/giphy.gif)
+
 ## What it does
 
 Sometimes, you need to override all css declarations with ``*`` (e.g. for the lulz). 
