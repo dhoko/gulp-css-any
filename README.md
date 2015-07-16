@@ -1,4 +1,4 @@
-# gulp-css-any
+# gulp-css-any ![https://travis-ci.org/dhoko/gulp-css-any](https://secure.travis-ci.org/dhoko/gulp-css-any.svg?branch=master)
 
 > css-any plugin for [gulp](https://github.com/wearefractal/gulp)
 
