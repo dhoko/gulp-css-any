@@ -1,11 +1,7 @@
-body {
-  font-family: "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: 12px !important;
-}
-
-p,
-div,
-.src {
-  color: red;
-  background-color: #000;
-}
+* {color: red;}
+body {color: red;}
+[class] {color: red;}
+#toto {color: red;}
+.monique{color: red;}
+.test,
+div {color: red;}

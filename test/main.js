@@ -10,15 +10,15 @@ require("mocha");
 delete require.cache[require.resolve("../")];
 
 var gutil = require("gulp-util"),
-	cssVip = require("../");
+	cssany = require("../");
 
-describe("gulp-css-vip", function () {
+describe("gulp-css-any", function () {
 
 	var expectedFile = new gutil.File({
-		path: "test/expected/hello.css",
+		path: "test/expected/hello.any.css",
 		cwd: "test/",
 		base: "test/expected",
-		contents: fs.readFileSync("test/expected/hello.vip.css")
+		contents: fs.readFileSync("test/expected/hello.any.css")
 	});
 
 	it("should produce expected file via buffer", function (done) {
@@ -30,7 +30,7 @@ describe("gulp-css-vip", function () {
 			contents: fs.readFileSync("test/fixtures/hello.css")
 		});
 
-		var stream = cssVip("World");
+		var stream = cssany("World");
 
 		stream.on("error", function(err) {
 			should.exist(err);
@@ -41,9 +41,10 @@ describe("gulp-css-vip", function () {
 
 			should.exist(newFile);
 			should.exist(newFile.contents);
-
-			String(newFile.contents).should.equal(String(expectedFile.contents));
+			console.log(newFile.contents.toString())
+			String(newFile.contents).trim().should.equal(String(expectedFile.contents).trim());
 			done();
+
 		});
 
 		stream.write(srcFile);
@@ -59,7 +60,7 @@ describe("gulp-css-vip", function () {
 			contents: fs.createReadStream("test/fixtures/hello.css")
 		});
 
-		var stream = cssVip("World");
+		var stream = cssany("World");
 
 		stream.on("error", function(err) {
 			should.exist(err);

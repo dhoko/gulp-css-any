@@ -1,29 +1,31 @@
 var through = require("through2"),
-    rework = require("rework"),
+	rework = require("rework"),
 	gutil = require("gulp-util");
 
 module.exports = function () {
 	"use strict";
-    // Fix nested rules
-    function addImportantToCssRules(rules) {
-        rules.forEach(function(r) {
-            if (r.declarations) {
-                r.declarations.forEach(function(d) {
-                    // Don't add important twice
-                    if (d.value && d.value.indexOf('!important') === -1) {
-                        d.value += ' !important';
-                    }
-                });
-            }
-            if (r.rules) {
-                addImportantToCssRules(r.rules);
-            }
-        });
-    }
+	// Fix nested rules
+	function addAnyToCssRules(rules) {
+		rules.forEach(function(r) {
+			if (r.selectors) {
+				r.selectors = r.selectors.map(function(sel) {
+					if (sel.charAt(0) !== "*") {
+						sel = "* " + sel;
+					}
+					return sel;
+				});
+			}
+			// console.log(r.selectors)
+
+			if (r.rules) {
+				addAnyToCssRules(r.rules);
+			}
+		});
+	}
 
 	// see "Writing a plugin"
 	// https://github.com/gulpjs/gulp/blob/master/docs/writing-a-plugin/README.md
-	function cssVip(file, enc, callback) {
+	function cssAny(file, enc, callback) {
 		/*jshint validthis:true*/
 
 		// Do nothing if no contents
@@ -35,16 +37,17 @@ module.exports = function () {
 		if (file.isStream()) {
 			// accepting streams is optional
 			this.emit("error",
-				new gutil.PluginError("gulp-css-vip", "Stream content is not supported"));
+				new gutil.PluginError("gulp-css-any", "Stream content is not supported"));
 			return callback();
 		}
 
 		// check if file.contents is a `Buffer`
 		if (file.isBuffer()) {
 
-            var css = rework(String(file.contents)).use(function(values) {
-                addImportantToCssRules(values.rules);
-            }).toString();
+			var css = rework(String(file.contents)).use(function(values) {
+				addAnyToCssRules(values.rules);
+			}).toString();
+			// console.log(css)
 			file.contents = new Buffer(css);
 
 			this.push(file);
@@ -53,5 +56,5 @@ module.exports = function () {
 		return callback();
 	}
 
-	return through.obj(cssVip);
+	return through.obj(cssAny);
 };

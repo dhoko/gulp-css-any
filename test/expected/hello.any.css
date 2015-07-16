@@ -1,0 +1,24 @@
+* {
+  color: red;
+}
+
+* body {
+  color: red;
+}
+
+* [class] {
+  color: red;
+}
+
+* #toto {
+  color: red;
+}
+
+* .monique {
+  color: red;
+}
+
+* .test,
+* div {
+  color: red;
+}

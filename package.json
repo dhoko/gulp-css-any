@@ -1,21 +1,20 @@
 {
-  "name": "gulp-css-vip",
-  "version": "1.0.2",
-  "description": "Lightweight gulp plugin that adds !important to all you css rules.",
+  "name": "gulp-css-any",
+  "version": "1.0.0",
+  "description": "Lightweight gulp plugin that adds * to all you css selectors.",
   "keywords": [
     "gulpplugin",
     "css",
     "reset",
     "important",
-    "widget",
-    "vip"
+    "widget"
   ],
   "author": {
-    "name": "David Gorges",
-    "email": "david.gorges@leaphub.de",
-    "url": "https://github.com/davidgorges"
+    "name": "dhoko",
+    "email": "dhoko@cyaneus.org",
+    "url": "https://github.com/dhoko"
   },
-  "repository": "davidgorges/gulp-css-vip",
+  "repository": "dhoko/gulp-css-any",
   "scripts": {
     "test": "istanbul test _mocha --report html -- test/*.js --reporter spec",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
